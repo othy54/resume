@@ -4,7 +4,7 @@
             class="overlay-loader fixed z-50 w-full h-screen left-0 top-0 bg-slate-600 flex justify-center items-center text-white text-5xl">
             <h6>Loading ...</h6>
         </div>
-        <div class="wrapper-three fixed w-full h-[100dvh] top-0 left-0"></div>
+        <div class="wrapper-three fixed w-full h-[100lvh] top-0 left-0"></div>
         <main class="relative">
             <Header class="fixed w-full z-[2]" />
 
