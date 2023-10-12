@@ -1,15 +1,12 @@
 <template>
-    <header class="section">
-        <div class="container flex justify-between items-center">
+    <header ref="header" class="section section-header -translate-y-[120%] transition-transform duration-300"
+        :class="isSticky && 'header--hidden'">
+        <div class="container flex justify-center items-center">
             <div>
-                <img width="300" height="88" class="max-w-[200px] invert " src="~/assets/img/logo-othman.svg"
-                    alt="logo othman">
-            </div>
-            <div>
-                <nav>
-                    <ul class="flex gap-10">
+                <nav class="bg-white bg-opacity-25  px-8 py-6 rounded-b-xl backdrop-blur-lg ">
+                    <ul class="flex gap-10 lg:gap-20">
                         <li v-for="item in menuItems" :key="item">
-                            <a class="text-white text-lg" :href="item.hash">
+                            <a class="text-white text-lg" :href="item.hash" :target="item.target">
                                 {{ item.label }}
                             </a>
                         </li>
@@ -21,24 +18,48 @@
 </template>
 <script setup>
 
+import CV from '../assets/pdf/cv-othman-bensaoula.pdf'
+
 const menuItems = ref([
-    // {
-    //     label: 'Formations',
-    //     hash: '#formations'
-    // },
+
     {
         label: 'Projets',
-        hash: '#projects'
+        hash: '#projects',
+        target: ''
     },
-    // {
-    //     label: 'Compétences',
-    //     hash: '#skills'
-    // },
-    // {
-    //     label: 'Autres',
-    //     hash: '#others'
-    // },
+    {
+        label: 'CV',
+        hash: CV,
+        target: '_blank'
+    },
+    {
+        label: 'LinkedIn',
+        hash: 'https://www.linkedin.com/in/othman-bensaoula-dev/',
+        target: '_blank'
+    }
 
 ])
+const header = ref(null);
+const isSticky = ref(false);
+const oldScroll = ref(0);
+const hideHeader = () => {
+
+    if (oldScroll.value < window.scrollY && window.scrollY > 150) {
+        isSticky.value = true;
+    } else if (oldScroll.value > window.scrollY) {
+        isSticky.value = false;
+    }
+
+    oldScroll.value = window.scrollY;
+}
+
+onMounted(() => {
+    window.addEventListener('scroll', hideHeader)
+})
 
 </script>
+<style scoped>
+.header--hidden {
+    transform: translateY(-100%) !important
+}
+</style>
