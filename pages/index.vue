@@ -160,10 +160,12 @@ const initThree = () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.querySelector('.wrapper-three').appendChild(renderer.domElement);
 
-
+    const SPEED = 0.0005;
 
     const animate = () => {
         renderer.render(scene, camera);
+        camera.rotation.z += SPEED;
+        camera.rotation.x += SPEED;
         requestAnimationFrame(animate);
     }
 
